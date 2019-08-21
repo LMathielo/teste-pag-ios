@@ -1,6 +1,0 @@
-framework module Pods_teste_pag_iosUITests {
-  umbrella header "Pods-teste-pag-iosUITests-umbrella.h"
-
-  export *
-  module * { export * }
-}
