@@ -6,6 +6,8 @@ target 'teste-pag-ios' do
   use_frameworks!
 
   # Pods for teste-pag-ios
+  pod 'SwiftyJSON'
+  pod 'Alamofire'
 
   target 'teste-pag-iosTests' do
     inherit! :search_paths
