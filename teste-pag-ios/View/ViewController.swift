@@ -82,7 +82,7 @@ extension UIViewController {
     func teste() {
         let apiClient = MarvelAPIClient()
         apiClient.send(GetGenders<Genre>()) { response in
-            print(response)
+            print("response ->\(response.data)")
 //            response.map { characters in
 //                for character in characters {
 //                    print("Name: \(character.name ?? "Unnamed character")")

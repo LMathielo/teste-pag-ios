@@ -1,6 +1,6 @@
 
 
-
+//TODO: Implementar um callback com Result Type
 typealias ResultCallback<Value> = (Result<Value, Error>) -> Void
 protocol APIClient {
     func send<T: APIRequest>(
@@ -41,72 +41,54 @@ struct GetGenders<filter: Encodable>: APIRequest {
         self.offset = offset
     }
     
-    func toList(item: Response) -> [Genre] {
-        return item.genres
-    }
-    
     func applyFilters(filter: Filter) -> Filter {
         return filter
     }
-//
-//    func toArray() -> [Genre] {
-//        if let resp = Response() {
-//
-//        }
-//    }
 }
 
 import Foundation
 
-struct teste {
-    
-    let apiClient = MarvelAPIClient()
-    
-}
-
 struct MarvelAPIClient {
-    func send<T: APIRequest>(_ request: T, completion: @escaping ResultCallback<T>) {
+    func send<T: APIRequest>(_ request: T, completion: @escaping (DataResponse<T.Response>) -> Void) {
         
-        
-        let endpoint = genre_list_api_url ///v1/public/characters//self.endpoint(for: request)
-        
+        let endpoint = "\(genre_list_api_url)"
         let filter = T.applyFilters(request)
-        
-        let url1 = URL(string: endpoint)!
-        let ulr2 = URLRequest(url: url1)
-//        let url3 = URLSession()
-//        let url4 = URLSession().dataTask(with: ulr2)
+        let dataResponse = DataResponse<T.Response>()
         
         let task = URLSession.shared.dataTask(with: URLRequest(url: URL(string: endpoint)!)) { data, response, error in
+            
+            if let response = response as? HTTPURLResponse {
+                dataResponse.status = response.statusCode
+            }
             if let data = data {
                 do {
-                    let response = try JSONDecoder().decode(DataResponse<T.Response>.self, from: data)
-                    
-                    if let dataContainer = response.data {
-//                        completion(Result.success(dataContainer))
-                        print(dataContainer)
-                    } else if let message = response.message {
-//                        completion(.failure( fatalError())) //MarvelError.server(message: message)))
-                    } else {
-//                        completion(.failure(fatalError()))//MarvelError.decoding))
-                    }
+                    let aresponse = try JSONDecoder().decode(T.Response.self, from: data)
+                    dataResponse.data = aresponse
+                    completion(dataResponse)
+//                    completion(.success(Result<DataResponse<T.Response>, Error>(dataResponse, nil)))
                 } catch {
-                    completion(.failure(error))
+                    dataResponse.message = error.localizedDescription
+                    dataResponse.status = 500 //forcando status por conta do json deserialization failure
+//                    completion(.failure(error))
+                    completion(dataResponse)
+                    
                 }
             } else if let error = error {
-                completion(.failure(error))
+//                completion(.failure(error))
+                if let response = response as? HTTPURLResponse {
+                    dataResponse.status = response.statusCode
+                }
+                dataResponse.message = error.localizedDescription
+                completion(dataResponse)
             }
         }
         task.resume()
     }
-    
 }
 
-
-
-
-struct DataResponse<Response: Decodable>: Decodable {
-    let status: String?
-    let message: String?
-    let data: Response?
+//NOT BEST IMPLEMENTATION?
+class DataResponse<Response: Decodable>: Decodable {
+    var status: Int?
+    var message: String?
+    var data: Response?
 }
