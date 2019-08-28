@@ -11,33 +11,13 @@ import Alamofire
 import SwiftyJSON
 
 struct ApiService {
-    static func teste() {
-        Alamofire.request(genre_list_api_url).responseJSON { (responseData) -> Void in
-            if((responseData.result.value) != nil) {
-                let swiftyJsonVar = JSON(responseData.result.value!)
-                print(swiftyJsonVar)
-                print("AAAA -> \(swiftyJsonVar.description)")
-                if let resData = swiftyJsonVar.arrayObject {
-//                    self.arrRes = resData as! [[        ]
-                }
-            }
-        }
-    }
-    
-    static func retrieveGenres(completion: @escaping ([Genre]?) -> Void) {
+    static func retrieveGenres(completion: @escaping (Genres?) -> Void) {
         Alamofire.request(genre_list_api_url)
             .responseJSON { response in
-//                guard response.result.isSuccess,
-//                    let value = response.result.value as? String else {
-//                        print("Error while fetching tags: \(String(describing: response.result.error))")
-//                        completion(nil)
-//                        return
-//                }
-//                let jsonData = JSON(value)["genres"]  //data(using: .utf8)!
-                let value = JSON(response.result.value!)["genres"]
+                let value = JSON(response.result.value!)
                 let jsonData = value.description.data(using: .utf8)!
                 do {
-                    let genre = try! JSONDecoder().decode([Genre].self, from: jsonData)
+                    let genre = try! JSONDecoder().decode(Genres.self, from: jsonData)
                     completion(genre)
                 }
                 catch {
@@ -45,9 +25,22 @@ struct ApiService {
                 }
                 
         }
-        //                let tags = JSON(value)["genres"].array?.map { json in
-        //                    json["id"].intValue
-        //                }
-        
+    }
+    
+    
+    static func retrieveMovies(completion: @escaping ([Movie]?) -> Void) {
+        Alamofire.request(movie_list_api_url)
+            .responseJSON { response in
+                let value = JSON(response.result.value!)["results"]
+                let jsonData = value.description.data(using: .utf8)!
+                do {
+                    let genre = try! JSONDecoder().decode([Movie].self, from: jsonData)
+                    completion(genre)
+                }
+                catch {
+                    print("ERROR IN PARSE")
+                }
+                
+        }
     }
 }

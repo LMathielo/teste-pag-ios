@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var genreList: [Genre]?
+    var genre2: Genres?
     var selectedGenreId: Int!
     
     override func viewDidLoad() {
@@ -20,14 +21,20 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         registerViewCell()
+        teste()
         ApiService.retrieveGenres(completion: { (genreList) in
-            self.genreList = genreList
+//            self.genreList = genre2
             print(genreList!)
             self.tableView.reloadDataWithAutoSizingCellWorkAround()
             })
     }
 
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showMovies" {
+            let vc = segue.destination as! MoviesTableViewController
+            vc.selectedGenreId = selectedGenreId
+        }
+    }
 }
 
 extension ViewController: UITableViewDelegate {
@@ -39,6 +46,8 @@ extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
         print(genreList![indexPath.row])
+        selectedGenreId = genreList![indexPath.row].id
+        performSegue(withIdentifier: "showMovies", sender: nil)
     }
 }
 
@@ -68,3 +77,18 @@ extension UITableView {
         self.reloadData()
     }
 }
+
+extension UIViewController {
+    func teste() {
+        let apiClient = MarvelAPIClient()
+        apiClient.send(GetGenders<Genre>()) { response in
+            print(response)
+//            response.map { characters in
+//                for character in characters {
+//                    print("Name: \(character.name ?? "Unnamed character")")
+//                }
+//            }
+        }
+    }
+}
+

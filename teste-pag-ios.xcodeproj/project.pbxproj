@@ -14,6 +14,11 @@
 		0F0B9219230CE9E00001E522 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F0B9217230CE9E00001E522 /* LaunchScreen.storyboard */; };
 		0F0B9224230CE9E00001E522 /* teste_pag_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0B9223230CE9E00001E522 /* teste_pag_iosTests.swift */; };
 		0F0B922F230CE9E00001E522 /* teste_pag_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0B922E230CE9E00001E522 /* teste_pag_iosUITests.swift */; };
+		0F277273230F753600CEF402 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F277271230F753600CEF402 /* MovieCell.swift */; };
+		0F277274230F753600CEF402 /* MovieCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F277272230F753600CEF402 /* MovieCell.xib */; };
+		0F277276230F789000CEF402 /* MoviesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F277275230F789000CEF402 /* MoviesTableViewController.swift */; };
+		0F73F4C4231602750080C5D3 /* TesteAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F73F4C3231602750080C5D3 /* TesteAPI.swift */; };
+		0FB0B8F42311B97400FE2D10 /* DetailedMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB0B8F32311B97400FE2D10 /* DetailedMovieViewController.swift */; };
 		0FCCB3DA230E076C005D1325 /* ProjectConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCCB3D9230E076C005D1325 /* ProjectConstants.swift */; };
 		0FCCB3DF230E0972005D1325 /* GenreViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCCB3DD230E0972005D1325 /* GenreViewCell.swift */; };
 		0FCCB3E0230E0972005D1325 /* GenreViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FCCB3DE230E0972005D1325 /* GenreViewCell.xib */; };
@@ -56,6 +61,11 @@
 		0F0B922A230CE9E00001E522 /* teste-pag-iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "teste-pag-iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F0B922E230CE9E00001E522 /* teste_pag_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = teste_pag_iosUITests.swift; sourceTree = "<group>"; };
 		0F0B9230230CE9E00001E522 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0F277271230F753600CEF402 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
+		0F277272230F753600CEF402 /* MovieCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieCell.xib; sourceTree = "<group>"; };
+		0F277275230F789000CEF402 /* MoviesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesTableViewController.swift; sourceTree = "<group>"; };
+		0F73F4C3231602750080C5D3 /* TesteAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesteAPI.swift; sourceTree = "<group>"; };
+		0FB0B8F32311B97400FE2D10 /* DetailedMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedMovieViewController.swift; sourceTree = "<group>"; };
 		0FCCB3D9230E076C005D1325 /* ProjectConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectConstants.swift; sourceTree = "<group>"; };
 		0FCCB3DD230E0972005D1325 /* GenreViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreViewCell.swift; sourceTree = "<group>"; };
 		0FCCB3DE230E0972005D1325 /* GenreViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenreViewCell.xib; sourceTree = "<group>"; };
@@ -131,6 +141,7 @@
 				0FCCB3DB230E0938005D1325 /* Components */,
 				0F0B920E230CE9DE0001E522 /* AppDelegate.swift */,
 				0FCCB3E7230E0C09005D1325 /* ApiService.swift */,
+				0F73F4C3231602750080C5D3 /* TesteAPI.swift */,
 				0FCCB3D9230E076C005D1325 /* ProjectConstants.swift */,
 				0F0B9212230CE9DE0001E522 /* Main.storyboard */,
 				0F0B9215230CE9E00001E522 /* Assets.xcassets */,
@@ -158,9 +169,19 @@
 			path = "teste-pag-iosUITests";
 			sourceTree = "<group>";
 		};
+		0F277270230F751D00CEF402 /* MovieCell */ = {
+			isa = PBXGroup;
+			children = (
+				0F277271230F753600CEF402 /* MovieCell.swift */,
+				0F277272230F753600CEF402 /* MovieCell.xib */,
+			);
+			path = MovieCell;
+			sourceTree = "<group>";
+		};
 		0FCCB3DB230E0938005D1325 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				0F277270230F751D00CEF402 /* MovieCell */,
 				0FCCB3DC230E0946005D1325 /* GenreCell */,
 			);
 			path = Components;
@@ -188,6 +209,8 @@
 			isa = PBXGroup;
 			children = (
 				0F0B9210230CE9DE0001E522 /* ViewController.swift */,
+				0F277275230F789000CEF402 /* MoviesTableViewController.swift */,
+				0FB0B8F32311B97400FE2D10 /* DetailedMovieViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -327,6 +350,7 @@
 				0F0B9216230CE9E00001E522 /* Assets.xcassets in Resources */,
 				0FCCB3E0230E0972005D1325 /* GenreViewCell.xib in Resources */,
 				0F0B9214230CE9DE0001E522 /* Main.storyboard in Resources */,
+				0F277274230F753600CEF402 /* MovieCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,10 +462,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FCCB3DA230E076C005D1325 /* ProjectConstants.swift in Sources */,
+				0F73F4C4231602750080C5D3 /* TesteAPI.swift in Sources */,
 				0FCCB3E8230E0C09005D1325 /* ApiService.swift in Sources */,
+				0F277273230F753600CEF402 /* MovieCell.swift in Sources */,
+				0FB0B8F42311B97400FE2D10 /* DetailedMovieViewController.swift in Sources */,
 				0F0B9211230CE9DE0001E522 /* ViewController.swift in Sources */,
 				0FCCB3E6230E0AA2005D1325 /* Movie.swift in Sources */,
 				0FCCB3DF230E0972005D1325 /* GenreViewCell.swift in Sources */,
+				0F277276230F789000CEF402 /* MoviesTableViewController.swift in Sources */,
 				0F0B920F230CE9DE0001E522 /* AppDelegate.swift in Sources */,
 				0FCCB3E4230E09BD005D1325 /* Genre.swift in Sources */,
 			);
